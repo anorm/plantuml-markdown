@@ -247,7 +247,10 @@ class PlantUMLPreprocessor(markdown.preprocessors.Preprocessor):
     def _inline_svg_image(self, diagram: bytes, options: Dict[str, Optional[str]]) -> str:
         data = self.ADAPT_SVG_REGEX.sub('<svg \\1\\2>', diagram.decode('UTF-8'))
         img = etree.fromstring(data.encode('UTF-8'))
-        if bool(self.config["remove_inline_svg_size"]):
+        if str(self.config["remove_inline_svg_size"]).lower() in ['height_only']:
+            # remove height in style attribute
+            img.attrib['style'] = re.sub(r'\b(?:height):\d+px;', '', img.attrib['style'])
+        elif str(self.config["remove_inline_svg_size"]).lower() in ['true', 'on', 'yes', '1']:
             # remove width and height in style attribute
             img.attrib['style'] = re.sub(r'\b(?:width|height):\d+px;', '', img.attrib['style'])
         img.attrib['preserveAspectRatio'] = 'xMaxYMax meet'
@@ -600,7 +603,7 @@ class PlantUMLMarkdownExtension(markdown.Extension):
             'classes': ["uml", "Space separated list of classes for the generated image. Defaults to 'uml'."],
             'alt': ["uml diagram", "Text to show when image is not available. Defaults to 'uml diagram'"],
             'format': ["png", "Format of image to generate (png, svg or txt). Defaults to 'png'."],
-            'remove_inline_svg_size': [True, "Remove the width and height attributes of inline_svg diagrams", "Defaults to True"],
+            'remove_inline_svg_size': [True, "Remove the width and height attributes of inline_svg diagrams. Valid options are 'True', 'False' and 'height_only' (which will remove all, none or the height attributes respectively.", "Defaults to 'True'"],
             'title': ["", "Tooltip for the diagram"],
             'server': ["", "PlantUML server url, for remote rendering. Defaults to '', use local command."],
             'kroki_server': ["", "Kroki server url, as alternative to 'server' for remote rendering (image maps must "
