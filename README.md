@@ -246,8 +246,8 @@ The plugin has several configuration option:
 * `fallback_to_get`: Fallback to `GET` if `POST` fails. Defaults to True
 * `format`: format of image to generate (`png`, `svg`, `svg_object`, `svg_inline` or `txt`). Defaults to `png` (See 
   example section above for further explanations of the values for `format`)
-* `remove_inline_svg_size`: When `format` is `svg_inline`, remove the `width` and `height` attributes of the generated
-  SVG. Defaults to True
+* `remove_inline_svg_size`: Only applicable when `format` is `svg_inline`. If `true`, remove the `width` and `height`
+  attributes of the generated SVG. If `height_only`, remove the `height` attribute only. Defaults to `true`.
 * `http_method`: Http Method for server - `GET` or `POST`. "Defaults to `GET`
 * `image_maps`: generate image maps if format is `png` and the diagram has hyperlinks; `true`, `on`, `yes` or `1`
   activates image maps, everything else disables it. Defaults to `true`
