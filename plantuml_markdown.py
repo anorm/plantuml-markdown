@@ -603,7 +603,7 @@ class PlantUMLMarkdownExtension(markdown.Extension):
             'classes': ["uml", "Space separated list of classes for the generated image. Defaults to 'uml'."],
             'alt': ["uml diagram", "Text to show when image is not available. Defaults to 'uml diagram'"],
             'format': ["png", "Format of image to generate (png, svg or txt). Defaults to 'png'."],
-            'remove_inline_svg_size': [True, "Remove the width and height attributes of inline_svg diagrams. Valid options are 'True', 'False' and 'height_only' (which will remove all, none or the height attributes respectively.", "Defaults to 'True'"],
+            'remove_inline_svg_size': ["True", "Remove the width and height attributes of inline_svg diagrams. Valid options are 'True', 'False' and 'height_only' (which will remove all, none or the height attributes respectively.", "Defaults to 'True'"],
             'title': ["", "Tooltip for the diagram"],
             'server': ["", "PlantUML server url, for remote rendering. Defaults to '', use local command."],
             'kroki_server': ["", "Kroki server url, as alternative to 'server' for remote rendering (image maps must "
